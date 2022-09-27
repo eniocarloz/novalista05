@@ -1,0 +1,37 @@
+---
+title: "LISTA-05"
+author: "ENIO SOUZA"
+date: "2022-09-27"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = FALSE)
+```
+
+# POLÍTICAS PÚBLICAS E O EXTRATIVISMO VEGETAL NO BRASIL
+
+A política de garantia de preços mínimos tem por objetivo garantir uma receita mínima aos produtores por meio do estabelecimento do preço mínimo para diversos produtos agropecuários e extrativos. Assim, o Governo Federal espera minimizar riscos inerentes ao processo produtivo e garantir a regularidade do abastecimento do país, interferindo na decisão dos produtores de continuar ofertando, ou não, mesmo diante de situações adversas de mercado. No Brasil a política está presente desde o final da primeira metade do século XX. Para Lescure et al (1994, apud Afonso, 2012), o extrativismo necessariamente agrega o papel de comercialização e, portanto, é considerado um conjunto de sistemas de exploração de produtos da floresta destinados ao mercado, seja ele local, regional, nacional ou mesmo internacional. Nessa perspectiva o extrativismo é tratado como uma atividade econômica, diferente de uma simples tarefa de coleta ou caça para o próprio consumo. Assim, várias cadeias produtivas têm em sua base de sustentação os produtores extrativistas, como no caso do babaçu, castanha-do-Brasil, mangaba, umbu, pinhão, açaí, cacau, piaçava, e tantos outros produtos vegetais não madeireiros . O mercado primário de produtos vegetais extrativos não madeireiros movimentou em 2020, aproximadamente, R\$ 1,9 bilhão para os produtores extrativistas. Se levarmos em consideração os produtos vegetais extrativos madeireiros esse montante cresce para R\$ 4,5 bilhões no mesmo ano, segundo IBGE. Os principais produtos extrativos vegetais não madeireiros em 2020 foram o pó cerífero da carnaúba, a castanha-do-Pará (ou castanha-do-Brasil), o babaçu (amêndoa), o açaí (fruto) e a erva mate. Há, todavia, indícios que mercados para produtos extrativos apresentam falhas em seu funcionamento. Informação incompleta e bens públicos (ou quase públicos) são exemplos de falhas presentes nesse mercado. A literatura econômica justifica a existência de políticas públicas para a correção de tais falhas de mercado. Souza (2006) define políticas públicas como um sistema de relações entre formulação, resultados e o ambiente. Já Birrer (2014) afirma ser um conjunto de procedimentos que expressam relações de poder e que se orienta à resolução de conflitos no que se refere aos bens públicos. Nesse sentido, ambos os autores expressam políticas públicas como ações que objetivam afetar as relações existentes entre os agentes econômicos para produzir determinado resultado, desejado pelos seus formuladores. Faremos neste trabalho uma apresnetação de dados da produção extrativa segundo o IBGE
+
+## Dados da PEVS/IBGE - Produção extrativa de PFNM
+
+Os produtos florestais não madeireiros (PFNM) constituem a pesquisa PEVS/IBGE obtida atraves do pacote Sidrar:
+
+```{r echo=TRUE, warning=FALSE}
+dados_extrativismo <- sidrar::get_sidra(289, variable = "allxp", period = "last", geo = "Brazil",
+geo.filter = NULL, classific = "all", category = "all", header = TRUE,
+format = 4, digits = "default", api = NULL)
+```
+
+## Gráfico Volume e Valor da produção
+
+```{r echo=TRUE, fig.align='center', fig.height=4, fig.width=8, message=FALSE, warning=FALSE, out.width="1\\linewidth", results='asis', size='small'}
+graf_extr <- ggpubr::ggboxplot(dados_extrativismo, x = "Variável", y = "Valor", color = "green", fill = "black", title = "Volume e Valor da produção", xlab = "Volume(Ton)", ylab = "Valor(R$)")
+```
+
+```{r}
+plot(graf_extr)
+```
+
